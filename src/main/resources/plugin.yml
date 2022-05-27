@@ -1,0 +1,11 @@
+name: Hide-N-Tag
+version: '${project.version}'
+main: me.kewlkidchristian.hidentag.HideNTag
+api-version: 1.18
+prefix: Hide 'N Tag
+authors: [ KewlKidChristian ]
+description: A fun mix of the traditional games of Hide 'N Seek and Tag.
+commands:
+  hidentag:
+    description: The heart of the plugin!
+    usage: "Usage: /<command>"
