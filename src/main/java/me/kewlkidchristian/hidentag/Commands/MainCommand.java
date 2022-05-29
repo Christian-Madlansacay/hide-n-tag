@@ -5,9 +5,11 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,10 +20,14 @@ import org.jetbrains.annotations.NotNull;
 public class MainCommand implements CommandExecutor {
 
     private final HideNTag plugin;
+    private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
     public MainCommand(HideNTag plugin) {
         this.plugin = plugin;
     }
+
+    public Location mapSpawn;
+    public Location seekerSpawn;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -48,14 +54,34 @@ public class MainCommand implements CommandExecutor {
                         // TODO: Teleport hider to map spawn
                     }
                 }
+            } else if (args[0].equalsIgnoreCase("setspawn")) {
+                if (sender instanceof Player player) {
+                    if (args[1].length() >= 1) {
+                        if (args[1].equalsIgnoreCase("map")) {
+                            mapSpawn = player.getLocation(); // TODO: *HIGHEST PRIORTIY* Create/setup data.toml
+
+                            Component parsedMessage = miniMessage.deserialize("" /* TODO: Replace with 'spawnSet' from messages config */, Placeholder.unparsed("spawn_type", "map"));
+
+                            player.sendMessage(parsedMessage);
+                        } else if (args[1].equalsIgnoreCase("seeker")) {
+                            seekerSpawn = player.getLocation(); // TODO: *HIGHEST PRIORTIY* Create/setup data.toml
+
+                            Component parsedMessage = miniMessage.deserialize("" /* TODO: Replace with 'spawnSet' from messages config */, Placeholder.unparsed("spawn_type", "seeker"));
+
+                            player.sendMessage(parsedMessage);
+                        }
+                    }
+                } else {
+                    Component parsedMessage = miniMessage.deserialize("" /* TODO: Replace with 'Errors.senderError' from messages config */, Placeholder.unparsed("sender_type", "player"));
+
+                    sender.sendMessage(parsedMessage);
+                }
             }
         } else {
             if (sender instanceof Player player) {
-                var miniMessage = MiniMessage.miniMessage();
+                Component parsedMessage = miniMessage.deserialize("" /* TODO: Replace with 'help' from messages config */);
 
-                Component parsed = miniMessage.deserialize(plugin.messages.getString("help"));
-
-                player.sendMessage(parsed);
+                player.sendMessage(parsedMessage);
             }
         }
 

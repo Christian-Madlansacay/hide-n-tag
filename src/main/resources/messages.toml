@@ -1,4 +1,13 @@
 help = """
 <dark_red>---- <red><bold>Hide 'N Tag Help <dark_red>----
 
-<blue><bold>/hidentag start: <reset>Starts the game of Hide 'N Tag with all of the currently online players."""
+<blue><bold>/hidentag start: <reset>Starts the game of Hide 'N Tag with all of the currently online players.<reset>
+<blue><bold>/hidentag setspawn <map|seeker>: <reset>Sets the spawnpoint for the Hide 'N Tag map and where the seeker waits.<reset>"""
+spawnSet = "Spawn has been set for \"<spawn_type>\"."
+
+[Prefixs]
+prefix = "<dark_gray>[<blue>Hide '<red>N Tag<dark_gray>]<reset> "
+errorPrefix = "<dark_gray>[<red>Error<dark_gray>]<reset> "
+
+[Errors]
+senderError = "You are not a \"<sender_type>\"!"

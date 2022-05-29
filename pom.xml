@@ -76,10 +76,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.moandjiezana.toml</groupId>
-            <artifactId>toml4j</artifactId>
-            <version>0.7.2</version>
-            <scope>compile</scope>
+            <groupId>com.electronwill.night-config</groupId>
+            <artifactId>toml</artifactId>
+            <version>3.6.5</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
